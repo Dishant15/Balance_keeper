@@ -9,7 +9,8 @@ def init_new_file():
 	global filename
 	print "Enter New Balance : "
 	Balance = input(">")
-
+	print "Enter Pocket Balance : "
+	pock_bal = input(">")
 	write_book = Workbook()
 	total_bal_write = write_book.add_sheet("total_bal")
 	pocket_bal_write = write_book.add_sheet("pocket_bal")
@@ -18,11 +19,20 @@ def init_new_file():
 	total_bal_write.write(0,2,"Comment")
 	total_bal_write.write(0,3,"Date")
 	total_bal_write.write(0,4,"Curr Balance")
+	pocket_bal_write.write(0,0,"Gain")
+	pocket_bal_write.write(0,1,"Lost")
+	pocket_bal_write.write(0,2,"Comment")
+	pocket_bal_write.write(0,3,"Date")
+	pocket_bal_write.write(0,4,"Curr Balance")
 
 	total_bal_write.write(1,0,Balance)
 	total_bal_write.write(1,2,"Starting balance")
 	total_bal_write.write(1,3,datetime.today(),easyxf(num_format_str='DD-MM-YYYY'))
 	total_bal_write.write(1,4,Balance)
+	pocket_bal_write.write(1,0,pock_bal)
+	pocket_bal_write.write(1,2,"Starting balance")
+	pocket_bal_write.write(1,3,datetime.today(),easyxf(num_format_str='DD-MM-YYYY'))
+	pocket_bal_write.write(1,4,pock_bal)
 
 	write_book.save(filename)
 
@@ -35,7 +45,6 @@ def update_balance(x, amount, comment):
 	write_book = copy(read_book)
 	total_bal_write = write_book.get_sheet(0)
 	pocket_bal_write = write_book.get_sheet(1)
-
 	#code to update Balance data
 	entry_len = len(total_bal_read.col_values(3))
 	curr_bal = total_bal_read.col_values(4)[-1]
@@ -49,7 +58,7 @@ def update_balance(x, amount, comment):
 	else:      #if Gain entry
 		curr_bal = curr_bal + amount
 	total_bal_write.write(entry_len,4,curr_bal)
-
+	#Save new updated data
 	write_book.save(filename)
 
 #User input options
@@ -65,6 +74,7 @@ elif entry == '3':
 	init_new_file()
 else:
 	print "Wrong Entry"
+	exit()
 
 
 while True:
