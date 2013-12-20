@@ -1,3 +1,5 @@
+#!/usr/local/bin/python
+
 from xlwt import *
 from xlrd import *
 from xlutils.copy import copy
@@ -9,21 +11,23 @@ def init_new_file():
 	global filename
 	print "Enter New Balance : "
 	Balance = input(">")
-	print "Enter Pocket Balance : "
-	pock_bal = input(">")
+	#print "Enter Pocket Balance : "
+	pock_bal = 0 #input(">")
 	write_book = Workbook()
 	total_bal_write = write_book.add_sheet("total_bal")
 	pocket_bal_write = write_book.add_sheet("pocket_bal")
-	total_bal_write.write(0,0,"Gain")
-	total_bal_write.write(0,1,"Lost")
-	total_bal_write.write(0,2,"Comment")
-	total_bal_write.write(0,3,"Date")
-	total_bal_write.write(0,4,"Curr Balance")
-	pocket_bal_write.write(0,0,"Gain")
-	pocket_bal_write.write(0,1,"Lost")
-	pocket_bal_write.write(0,2,"Comment")
-	pocket_bal_write.write(0,3,"Date")
-	pocket_bal_write.write(0,4,"Curr Balance")
+	total_bal_write.write(0,0,"Gain",easyxf('pattern: pattern solid, fore_colour yellow;'))
+	total_bal_write.write(0,1,"Lost",easyxf('pattern: pattern solid, fore_colour yellow;'))
+	total_bal_write.write(0,2,"Comment",easyxf('pattern: pattern solid, fore_colour yellow;'))
+	total_bal_write.write(0,3,"Date",easyxf('pattern: pattern solid, fore_colour yellow;'))
+	total_bal_write.write(0,4,"Curr Balance",easyxf('pattern: pattern solid, fore_colour yellow;'))
+	pocket_bal_write.write(0,0,"Gain",easyxf('pattern: pattern solid, fore_colour yellow;'))
+	pocket_bal_write.write(0,1,"Lost",easyxf('pattern: pattern solid, fore_colour yellow;'))
+	pocket_bal_write.write(0,2,"Comment",easyxf('pattern: pattern solid, fore_colour yellow;'))
+	pocket_bal_write.write(0,3,"Date",easyxf('pattern: pattern solid, fore_colour yellow;'))
+	pocket_bal_write.write(0,4,"Curr Balance",easyxf('pattern: pattern solid, fore_colour yellow;'))
+	total_bal_write.col(2).width = 20000
+	#pocket_bal_write.col(2).width = 65536
 
 	total_bal_write.write(1,0,Balance)
 	total_bal_write.write(1,2,"Starting balance")
@@ -65,6 +69,8 @@ def update_balance(x, amount, comment):
 print "1 : Expenditure Entry"
 print "2 : Income Entry"
 print "3 : Creat new xls file"
+print "Enything else to exit"
+x = 0
 entry = raw_input(">")
 if entry == '1':
 	x = 1
@@ -72,10 +78,10 @@ elif entry == '2':
 	x = 2
 elif entry == '3':
 	init_new_file()
+	exit()
 else:
 	print "Wrong Entry"
 	exit()
-
 
 while True:
 	print "Type in amount :"
