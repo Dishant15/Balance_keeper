@@ -62,6 +62,7 @@ def update_balance(x, amount, comment):
 	else:      #if Gain entry
 		curr_bal = curr_bal + amount
 	total_bal_write.write(entry_len,4,curr_bal)
+	print "Current Balance = ",curr_bal
 	#Save new updated data
 	write_book.save(filename)
 
