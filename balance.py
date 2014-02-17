@@ -76,7 +76,7 @@ entry = raw_input(">")
 if entry == '1':
 	x = 1
 elif entry == '2':
-	x = 2
+	x = 0
 elif entry == '3':
 	init_new_file()
 	exit()
